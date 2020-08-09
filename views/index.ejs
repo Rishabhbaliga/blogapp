@@ -1,0 +1,40 @@
+<% include ./partials/header %>
+<div class="ui main text container">
+    <div class="ui huge header">My Blog App</div>
+    <div class="ui top  attached segment">
+        <div class="ui divided items">
+            <% blogs.forEach(function(blog){ %>
+                <div class="item">
+                    <div class="image">
+                        <img src="<%= blog.image %>">        
+                    </div>
+                    <div class="content">
+                        <a class="header" href="/blogs/<%= blog._id %>"><%= blog.title %></a>    
+                        <!-- display last modified date -->
+                        <div class="meta">
+                            <span><%= blog.created.toDateString() %></span>            
+                        </div>
+                        <!-- description display -->
+                        <div class="description">
+                            <p><%- blog.body.substring(0, 100) %>...</p>
+                        </div>
+                        <!-- blog control buttons -->
+                        <div class="extra">
+                            <!-- read more button -->
+                            <a class="ui floated basic violet button" href="/blogs/<%= blog._id %>">
+                                    Read More
+                                    <i class="right chevron icon"></i>
+                            </a>  
+                            <!-- delete button   -->
+                            <form id="delete" action="/blogs/<%= blog._id %>?_method=DELETE" method="POST">
+                                <button class="ui red basic button">DELETE</button>
+                            </form>
+                        </div>
+                    </div>
+        </div>
+<% }); %>
+    </div>
+    </div>
+</div>
+
+<% include ./partials/footer %>
